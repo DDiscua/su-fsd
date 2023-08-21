@@ -17,7 +17,6 @@ export const sortByCreatedAt = (items) => {
     return items.sort((a, b) => {
         const dateA = moment(a.date, 'DD/MM/YYYY[T]HH:mm:ss');
         const dateB = moment(b.date, 'DD/MM/YYYY[T]HH:mm:ss');
-        console.log(dateA, dateB);
         return dateA.unix() - dateB.unix();
     });
 }
@@ -26,29 +25,19 @@ export const sortByCreatedAt = (items) => {
 
 export const sortByAZ = (items) => {
     return items.sort((a, b) => {
-        if (a.title < b.title) {
-            return -1;
-        }
-        else if (a.title > b.title) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
+        return a.name.localeCompare(b.name, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        });
     });
 }
 
 export const sorByZA = (items) => {
     return items.sort((a, b) => {
-        if (a.title < b.title) {
-            return 1;
-        }
-        else if (a.title > b.title) {
-            return -1;
-        }
-        else {
-            return 0;
-        }
+        return b.name.localeCompare(a.name, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        });
     });
 }
 

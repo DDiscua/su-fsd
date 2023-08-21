@@ -29,7 +29,7 @@ const mapData = (data) => {
         const split = array[i].split(',');
         retVal.push({
             date: split[0],
-            name: split[1],
+            name: split[1].replace('\r', '')
         });
     }
 
