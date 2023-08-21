@@ -41,10 +41,30 @@ button {
   border: 1px solid black;
   width: 100%;
   border-radius: 8px;
-  padding: 1rem;
+
 }
 
-.main {
+.main-container {
   width: 100%;
   padding: 10em;
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.dropdown-container {
+  width: 100%;
+  padding: 10em;
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.dropdown-input {
+  min-width: 200px;
 }

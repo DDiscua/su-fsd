@@ -22,10 +22,11 @@ export default function handler(req, res) {
 
 
 const mapData = (data) => {
-    const aray = data.split('\n');
+    const array = data.split('\n');
+    console.log(data);
     const retVal = [];
-    for (let i = 0; i < aray.length; i++) {
-        const split = aray[i].split(',');
+    for (let i = 0; i < array.length; i++) {
+        const split = array[i].split(',');
         retVal.push({
             date: split[0],
             name: split[1],

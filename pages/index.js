@@ -1,54 +1,32 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { Card } from '../components/card';
-import { Row, Col, Dropdown, Space, Button } from 'antd';
+import { Card, DropdownSort } from '../components';
+import { Row, Col, Spin } from 'antd';
+import { sortBy } from "./utils/sortBy";
 import styles from '../styles/Home.module.css';
 
-
-const items = [
-  {
-    label: 'Created At',
-    key: '1',
-  },
-  {
-    label: 'A - Z',
-    key: '2',
-  },
-  {
-    label: 'Z - A',
-    key: '3',
-  }
-];
-
-
 export default function Home() {
-  const [currentOption, setCurrentOption] = useState('');
-  const [data, setData] = useState({});
+
+  const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/utility')
       .then((res) => res.json())
       .then((data) => {
-        setData(data)
-        setLoading(false)
+        setData(data);
+        console.log('data', data);
+        setLoading(false);
       })
-  }, [])
+  }, [isLoading])
 
 
-
-
-  const handleMenuClick = (e) => {
-    console.log('click', e);
-    setCurrentOption(e.label);
-  };
-
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClick,
-  };
+  const sortData = (sortType) => {
+    setLoading(true);
+    const sortedData = sortBy(data, sortType);
+    setData([...sortedData]);
+    setLoading(false);
+  }
 
   return (
     <div className={styles.container}>
@@ -57,33 +35,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className='main'>
-        <Row align="top" justify={"center"}>
+      <main className='main-container'>
+        <Row align="top" justify={"center"} className='dropdown-container'>
           <Col xs={24} md={12} lg={8} xl={8} >
-            <Dropdown menu={menuProps}>
-              <Button>
-                <Space>
-                  {
-                    currentOption ? currentOption : 'Sort By'
-                  }
-                </Space>
-                <DownOutlined />
-              </Button>
-            </Dropdown>
+            <DropdownSort sortHook={sortData} />
           </Col>
         </Row>
-        <Row align="top" justify={"center"}>
-          {
-            data && data.map((item, index) => {
-              return (
-                <Col xs={24} md={12} lg={8} xl={8} key={`col_${index}`}>
-                  <Card key={index} date={item.date} name={item.name} />
-                </Col>
-              )
-            })
-          }
-        </Row>
-
+        {
+          isLoading
+            ?
+            <Row align="top" justify={"center"} >
+              <Spin size="large" tip="Loading" ></Spin>
+            </Row>
+            :
+            <Row align="top" justify={"center"} gutter={16}>
+              {
+                data && data.map((item, index) => {
+                  return (
+                    <Col xs={24} md={12} lg={8} xl={8} key={`col_${index}`} span={8} style={{ paddingTop: '2rem' }}>
+                      <Card key={index} date={item.date} name={item.name} />
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+        }
       </main>
     </div>
   )
