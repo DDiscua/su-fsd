@@ -8,4 +8,4 @@ NextJS app using antd
 
 ### Vercel Link
 
-
+https://su-8gsfs8ow6-ddiscua.vercel.app/
