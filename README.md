@@ -1,2 +1,11 @@
 # su-fsd
-Description
+
+NextJS app using antd
+
+### Run the project
+
+```npm run dev```
+
+### Vercel Link
+
+

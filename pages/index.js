@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { Card, DropdownSort } from '../components';
 import { Row, Col, Spin } from 'antd';
-import { sortBy } from "./utils/sortBy";
+import { sortBy } from "../utils/sortBy";
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
